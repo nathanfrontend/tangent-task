@@ -46,6 +46,7 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
       });
     },
     onSuccess: () => {
+      // Check our cache and update data that has changed
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
@@ -53,6 +54,7 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
     return likes.some((element) => element.id === data.id);
   };
   const likePost = () => {
+    // if ids match then we will unlike and if they dont then we will like
     if (!hasMatchingId()) {
       likeMutation.mutate();
       setLikes((prev) => [...prev, { ...data }]);

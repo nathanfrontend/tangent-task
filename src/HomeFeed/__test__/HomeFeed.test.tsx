@@ -60,6 +60,6 @@ describe("HomeFeed", () => {
     screen.debug();
   });
 });
-function setOffset(value: SetStateAction<number>): void {
+function setOffset(): SetStateAction<number> {
   throw new Error("Function not implemented.");
 }
