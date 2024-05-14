@@ -31,7 +31,8 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
       });
     },
     onSuccess: () => {
-      // Check our cache and update data that has changed
+      // Check our cache and update data that has changed -  paired with optimistic updates the likes will change
+      //even with ultra slow internet, if the call fails we can place a fallback in the code to reset the optimistic update
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
@@ -46,7 +47,8 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
       });
     },
     onSuccess: () => {
-      // Check our cache and update data that has changed
+      // Check our cache and update data that has changed -  paired with optimistic updates the likes will change
+      //even with ultra slow internet, if the call fails we can place a fallback in the code to reset the optimistic update
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });

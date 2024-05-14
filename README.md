@@ -1,30 +1,19 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This task provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+1. cd into project path
+2. npm install - if you prefer yarn - remove the lock file and run yarn
+3. npm run dev
+4. to run active tests - run npm run tests, this will run vitest to run test suites
+5. to find out overall test coverage, run - npm run coverage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Any questions on decisions to use certain technologies please let me know.
+I have left the env in as a CONST type file, well aware normally this would be ignored normally.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Things i was thinking on doing with more time
+- Optimistic update inline with invalidation of queries from cache, functionality works fine as is, but with a small tweek with optmistic updates, the likes count will still update with slow connection.
+- Cypress test suite, e2e testing is a must for me, and is to be prioritised over unit tests in my opinion.
+- more custom lazy loading as opposed to just brower api version - tehre wasnt enough images to actually test this really
+- further optmising of blurred image to transition photos on content
+- use of cdn for images
