@@ -1,24 +1,64 @@
+import { ErrorAlert } from "@/components/alert";
 import { PostCard } from "@/components/postCard";
+import { PaginationPosts } from "@/components/postPagination";
+import { SkeletonCard } from "@/components/skeletonCard";
+import { DocumentResponse } from "@/types";
+import { env } from "@/types/env";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
+// .env for endpoint which will be accessible, for yourself using gitignore - othe otherwise would be ignored
+const endpoint = env.VITE_POST_ENDPOINT;
 const HomeFeed = () => {
-  const data = [
-    {
-      id: 1,
-      image: "http://localhost:4321/public/flozza_1.jpg",
-      username: "flozza",
-      likes: 9999,
-      caption: "Hard day at the office 😴",
-      createdAt: "2024-05-13T13:59:24.896Z",
-      updatedAt: "2024-05-13T13:59:24.896Z",
-    },
-  ];
+  const [offset, setOffset] = useState<number>(0);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["posts", offset],
+    queryFn: () =>
+      fetch(`${endpoint}?limit=10&offset=${offset}`).then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
+        return res.json();
+      }),
+    // placeholderData: keepPreviousData,
+    // staleTime: 5000,
+  });
+
+  console.log({ data, isLoading });
+
   return (
     <div className="flex flex-col ">
       <div className="mb-5">
-        <h2 className="mb-5">Feed</h2>
+        <h2 className="mb-5 ">Feed</h2>
         <div className="w-full flex justify-center">
-          <div className="flex flex-col max-w-sm rounded-sm overflow-hidden">
-            <PostCard data={data[0]} />
+          <div className="flex flex-col max-w-sm rounded-sm overflow-hidden animate-fadeIn">
+            {error && <ErrorAlert message={error.message} />}
+            {isLoading && <SkeletonCard />}
+            {data?.posts.length === 0 && (
+              <div className="flex flex-col gap-4 justify-center items-center mt-24">
+                <img
+                  src="/no-data.svg"
+                  className="h-[200px] w-[200px]"
+                  alt="no data image"
+                />
+
+                <h2 className="text-2xl">No Posts Yet, try refresh</h2>
+              </div>
+            )}
+            {data?.posts.length > 0 &&
+              data.posts.map((item: DocumentResponse) => (
+                <PostCard data={item} key={item.id} />
+              ))}
+
+            {data?.posts.length > 0 && (
+              <PaginationPosts
+                setOffset={setOffset}
+                limit={data?.limit}
+                total={data?.total}
+                offset={offset}
+              />
+            )}
           </div>
         </div>
       </div>

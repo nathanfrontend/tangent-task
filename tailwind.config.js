@@ -17,6 +17,15 @@ module.exports = {
       },
     },
     extend: {
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 3s ease 1 forwards',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -13,7 +13,6 @@ type IPostCardProps = {
   data: DocumentResponse;
 };
 export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
-  console.log(data);
   return (
     <Card className="mb-6">
       <CardHeader className=" p-3">
