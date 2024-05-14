@@ -1,10 +1,14 @@
 import "./App.css";
 import HomeFeed from "./HomeFeed/HomeFeed";
+import Header from "./components/header";
 
 function App() {
   return (
     <>
-      <div className="flex justify-center">
+      <div>
+        <Header />
+      </div>
+      <div className="flex justify-center py-4">
         <HomeFeed />
       </div>
     </>
