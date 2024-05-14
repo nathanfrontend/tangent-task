@@ -4,7 +4,7 @@ import { PaginationPosts } from "@/components/postPagination";
 import { SkeletonCard } from "@/components/skeletonCard";
 import { DocumentResponse } from "@/types";
 import { env } from "@/types/env";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 // .env for endpoint which will be accessible, for yourself using gitignore - othe otherwise would be ignored
@@ -15,7 +15,11 @@ const HomeFeed = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", offset],
     queryFn: () =>
-      fetch(`${endpoint}?limit=10&offset=${offset}`).then((res) => {
+      fetch(`${endpoint}?limit=10&offset=${offset}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch");
         }
