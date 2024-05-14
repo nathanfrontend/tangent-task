@@ -67,8 +67,11 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
         <CardTitle className="flex items-center space-x-4">
           <span>
             <img
+              // ideally would make use of a cdn in production
+              loading="lazy"
               src={data.image}
               className="w-10 h-10 rounded-full border-2 border-slate-800 object-cover"
+              alt="PostAvatar"
             />
           </span>
           <span className="flex-1">{data.username}</span>
@@ -78,7 +81,13 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 ">
-        <img src={data.image} />
+        <img
+          src={data.image}
+          loading="lazy"
+          alt="PostContent"
+          width="auto"
+          height="auto"
+        />
       </CardContent>
       <CardFooter className="flex flex-col p-3 ">
         <div className="flex justify-between w-full mb-3">
@@ -90,7 +99,7 @@ export const PostCard: React.FunctionComponent<IPostCardProps> = ({ data }) => {
               `${hasMatchingId() ? "fill-red-500" : "fill-white"}`
             )}
           />
-          <MessageCircle className="mr-3" />
+          <MessageCircle className="mr-3 cursor-pointer" />
         </div>
         <div className="w-full text-sm">{data.likes} likes</div>
         <div className="w-full text-sm">

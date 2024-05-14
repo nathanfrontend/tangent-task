@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "types":["node","jest","@testing-library/jest-dom"],
     "paths": {
       "@/*": [
         "./src/*"
@@ -25,6 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/HomeFeed/__test__", "setup.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

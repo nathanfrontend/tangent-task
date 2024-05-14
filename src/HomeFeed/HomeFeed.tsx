@@ -11,7 +11,7 @@ import { useState } from "react";
 const endpoint = env.VITE_POST_ENDPOINT;
 const HomeFeed = () => {
   const [offset, setOffset] = useState<number>(0);
-
+  // fetch data using react-query
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", offset],
     queryFn: () =>
@@ -25,11 +25,7 @@ const HomeFeed = () => {
         }
         return res.json();
       }),
-    // placeholderData: keepPreviousData,
-    // staleTime: 5000,
   });
-
-  console.log({ data, isLoading });
 
   return (
     <div className="flex flex-col ">
@@ -41,6 +37,7 @@ const HomeFeed = () => {
             {data?.posts.length === 0 && (
               <div className="flex flex-col gap-4 justify-center items-center mt-24">
                 <img
+                  loading="lazy"
                   src="/no-data.svg"
                   className="h-[200px] w-[200px]"
                   alt="no data image"
